@@ -1,0 +1,230 @@
+﻿.form-control:focus {
+    border: 1px solid #ccc;
+    outline: 0;
+    -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102,175,233,.6);
+    box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102,175,233,.6);
+}
+
+label {
+    color: #000000;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.login-btn {
+    text-transform: capitalize !important;
+    padding: 20px 0px !important;
+    color: #fff;
+    background: #D94425 !important;
+       background-image: -webkit-linear-gradient(top, #D94425, #7C1314) !important;
+       background-image: -moz-linear-gradient(top, #D94425, #7C1314) !important;
+       background-image: -ms-linear-gradient(top, #D94425, #7C1314) !important;
+       background-image: -o-linear-gradient(top, #D94425, #7C1314) !important;
+       background-image: linear-gradient(to bottom, #D94425, #7C1314) !important;
+       -webkit-border-radius: 20px;
+       -moz-border-radius: 20px;
+       border-radius: 20px;
+}
+
+    .login-btn:hover {
+        color: #fff;
+    }
+
+.page-wrapper {
+    min-height: 100vh;
+    background-color: #F7F7F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: white;
+    border-radius: 0px;
+    display: flex;
+    /*margin-top: 5%;*/
+}
+
+.left-box {
+    padding: 0px 55px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.right-box {
+    flex: 2;
+    background-size: cover;
+    background-image: url('images/login.jpg');
+}
+
+.login-wrapper {
+    margin-bottom: 20px;    
+    border: 1px solid #6c757d;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);    
+}
+
+.form-control {
+    box-shadow: none;
+    transition: none;
+}
+
+.welcometxt {
+    color: white;
+    margin: auto 0;
+    margin-top: 20%;
+}
+
+.linebreak {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+    .linebreak::before,
+    .linebreak::after {
+        content: "";
+        display: inline-block;
+        width: 20%;
+        height: 1px;
+        margin: 0 8px;
+        background-color: white;
+    }
+
+.btn-warning {
+    background-color: #be2025;
+    padding: 10px;
+    color: #fff;
+}
+
+    .btn-warning:active {
+        background-color: #404040;
+        border: none;
+    }
+
+    .btn-warning:hover, .btn-warning.hover {
+        border: none;
+    }
+
+    .btn-warning:hover {
+        background-color: #851417;
+        padding: 10px;
+    }
+
+
+@media only screen and (max-width: 600px) {
+    .right-box {
+        display: none;
+    }
+}
+
+.logo {
+    /*padding: 10px 0px 15px 10px;*/
+    padding: 0px 0px 0px 0px;
+}
+
+footer {
+    padding: 10px 0px;
+    float: left;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+.left-box h2 {
+    border-bottom: solid 1px #eee;
+    padding: 10px 0px 10px 0px;
+    text-transform: capitalize;
+}
+
+.form-control {
+    box-shadow: none;
+    transition: none;
+    padding: 18px 12px;
+    height: 58px;
+    background-color: #f8f8f8;
+    font-size: 18px;
+    color: #000000;
+}
+
+
+@-webkit-keyframes swinging {
+    0% {
+        -webkit-transform: rotate(10deg);
+    }
+
+    50% {
+        -webkit-transform: rotate(-5deg)
+    }
+
+    100% {
+        -webkit-transform: rotate(10deg);
+    }
+}
+
+@keyframes swinging {
+    0% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(-5deg)
+    }
+
+    100% {
+        transform: rotate(10deg);
+    }
+
+    from {
+        top: 0px;
+    }
+
+    to {
+        bottom: 200px;
+    }
+}
+
+.swingimage {
+    animation-direction: alternate;
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-animation: swinging 3.5s ease-in-out forwards infinite;
+    animation: swinging 2.5s ease-in-out forwards infinite;
+}
+
+.move {
+    display: none;
+    width: 100px;
+    height: 100px;
+    float: right;
+    text-align: right;
+    position: relative;
+    -webkit-animation: mymove 5s forwards; /* Safari 4.0 - 8.0 */
+    animation: mymove 5s forwards;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes mymove {
+    from {
+        top: -20px;
+    }
+
+    to {
+        top: 180px;
+    }
+}
+
+@keyframes mymove {
+    from {
+        top: -20px;
+    }
+
+    to {
+        top: 180px;
+    }
+}

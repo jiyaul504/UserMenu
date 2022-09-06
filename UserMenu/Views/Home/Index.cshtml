@@ -1,0 +1,131 @@
+﻿@using UserLibrary.BusinessModel
+@using Kendo.Mvc.UI
+
+@section scripts
+    {
+
+    <script src="~/Scripts/Admin.js"></script>
+
+}
+    <style>
+        .k-grid table {
+            font-size: 14px;
+        }
+
+    </style>
+    <script>
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <div class="container background-ban">
+        <br />
+        <div class="col-md-12 col-lg-12 subheader2">
+            <h1 style="font-style:normal;"> Menu List</h1>
+            <hr />
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-12 col-form-label"> Menu <span class="ashetrik1"> *</span></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" maxlength="150" placeholder="Enter Menu Name" id="txtMenu" name="txtMenu">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-12 col-form-label"> Display Name <span class="ashetrik1"> *</span></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" maxlength="250" placeholder="Enter Display Menu Name" id="txtDisMenu" name="txtDisMenu">
+            </div>
+        </div>
+        <div class="form-group" style="display:none">
+            <label class="col-sm-12 col-form-label"> Menu <span class="ashetrik1"> *</span></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" placeholder="Enter Menu Name" id="txtMenuID" name="txtMenuID">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-12 col-form-label"> Sequence No. <span class="ashetrik1"> *</span></label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control" maxlength="2" onkeypress="return isNumber(event)" placeholder="Enter Sequence Number" id="txtPriority" name="txtPriority">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-12 col-form-label"> Page Url: <span class="ashetrik1"> *</span></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" maxlength="100" placeholder="Enter Page Url" id="txtPageUrl" name="txtPageUrl">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-12 col-form-label"> Parent Menu <span class="ashetrik1"> *</span></label>
+            <div class="col-sm-4" style="height:40px">
+                <select id="ddlmenu" style="height:40px" class="form-control pwc_dropdown_ctrl">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12 col-lg-12 p-text">
+                Status: <span class="ashetrik1"> *</span>
+            </div>
+            <br />
+            <div class="col-md-12 col-lg-12" style="font-weight:700">
+                <input id="IsStatusTrue" name="IsStatusTrue" type="radio" value="true">
+                <label for="IsStatusYes">Yes</label>
+                <input id="IsStatusFalse" name="IsStatusFalse" type="radio" value="false">
+                <label for="IsStatusNo">No</label><br />
+
+
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-1 text-center">
+
+            <button ID="btnSubmit" type="button" class="btn btn-danger">Submit</button>
+        </div>
+    </div>
+    <div class="row">
+
+        <div id="adminListingGrid"></div>
+    </div>
+    <script type="text/javascript">
+
+        //$("#btnSubmit").click(function () {
+        //    alert();
+        //});
+
+    </script>
+    <div id="adminSuccessModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" name="lblTitle">Success!</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center" id="lblMessage">Admin Added successfully!</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-warning" style="background-color:#ff5220;margin-right: 15px;" data-dismiss="modal" id="btnEditAdminModal">Ok</button>
+                            </div>
+                            <div class="col-md-5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
