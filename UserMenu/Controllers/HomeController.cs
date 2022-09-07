@@ -2,59 +2,41 @@
 using UserLibrary.ServiceContracts;
 using UserMenu.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
 using PagedList;
-
-using Microsoft.AspNetCore.Authorization;
-
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-
-using System.Net;
 using Newtonsoft.Json;
-using System.IO;
 using UserLibrary.BusinessModel;
 using UserLibrary.Enums;
-using UserLibrary.Common;
 using UserLibrary.Common;
 
 namespace CommonTests.Web.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly IDocumentManager documentManager;
-        //  private readonly IUserInterface userInterface;
+        
 
 
         private readonly ILogger<HomeController> _logger;
 
         public IMenuService _MenuService;
         public ILoggerService _loggerService;
-        //public ICommonService _CommonService;
+        
 
         public HomeController(ILogger<HomeController> logger, IMenuService MenuService, ILoggerService loggerService)// ICommonService commonService)
         {
-            // userInterface = _userInterface;
+           
             _MenuService = MenuService;
             _logger = logger;
             _loggerService = loggerService;
-            // _CommonService = commonService;
+          
         }
         [HttpGet]
-        //public async Task<ActionResult> SaveMenu(string menuId,string Menu, string priority, string PageUrl, string status)
+        
         public ActionResult SaveMenu(string menuId, string Menu, string DisplayName, string sequenceNumber, string PageUrl, string parentId, string status, string userdata)
         {
 
-            //var userAge = int.Parse(TempData["age"].ToString());
+            
             ResponseData _responseData = new ResponseData();
-            //  string data = "Successss";
+            
             try
             {
                 int result = 0;
@@ -108,9 +90,9 @@ namespace CommonTests.Web.Controllers
                 menuInfo.StatusID = StatusId;
 
                 List<MenuInfo> Dashboardlst = new List<MenuInfo>();
-                //Dashboardlst = _MenuService.SaveMenu(menuInfo);
+                
                 result = _MenuService.SaveMenu(menuInfo, userData);
-                //var pageresult = (List<MasterErrorMessage>)TempData.Peek("MasterErrorMsg");
+               
                 var tempresult = TempData["MasterErrorMsg"];
                 var pageresult = JsonConvert.DeserializeObject<List<MasterErrorMessage>>(tempresult.ToString());
                 TempData.Keep();
@@ -145,7 +127,7 @@ namespace CommonTests.Web.Controllers
                     }
                 }
                 TempData.Remove("MasterErrorMsg");
-                //return Json(result, JsonRequestBehavior.AllowGet);
+               
             }
             catch (Exception ex)
             {
@@ -211,9 +193,9 @@ namespace CommonTests.Web.Controllers
                 submenuInfo.StatusID = StatusId;
 
                 List<SubMenuInfo> Dashboardlst = new List<SubMenuInfo>();
-                //Dashboardlst = _MenuService.SaveSubMenu(submenuInfo);
+                
                 result = _MenuService.SaveSubMenu(submenuInfo, userData);
-                //return Content(JsonConvert.SerializeObject(Dashboardlst), "application/json");
+                
                 var tempresult = TempData["MasterErrorMsg"];
                 var pageresult = JsonConvert.DeserializeObject<List<MasterErrorMessage>>(tempresult.ToString());
                 TempData.Keep();
@@ -248,8 +230,7 @@ namespace CommonTests.Web.Controllers
                     }
                 }
                 TempData.Remove("MasterErrorMsg");
-                //result = _MenuService.SaveMenu(menuInfo);
-                //return Json(result, JsonRequestBehavior.AllowGet);
+                
             }
             catch (Exception ex)
             {
@@ -294,7 +275,7 @@ namespace CommonTests.Web.Controllers
                 menuInfo.pageSize = pageSize;
                 menuInfo.pageIndex = pageIndex;
 
-                //var allUserLOSList = _MenuService.GetMenuListings(pageSize, pageIndex);
+                
                 var allUserLOSList = _MenuService.GetMenuListings(menuInfo);
 
                 adminListings = new StaticPagedList<MenuInfo>(
@@ -320,7 +301,7 @@ namespace CommonTests.Web.Controllers
                 roleInfo.pageSize = pageSize;
                 roleInfo.pageIndex = pageIndex;
 
-                //var allUserLOSList = _MenuService.GetMenuListings(pageSize, pageIndex);
+                
                 var allUserLOSList = _MenuService.GetRoleListings(roleInfo);
 
                 adminListings = new StaticPagedList<Role>(
@@ -425,7 +406,7 @@ namespace CommonTests.Web.Controllers
             {
                 MenuList MenuInfo = new MenuList();
                 MenuInfo.Role_ID = RoleId;
-                // List<MenuList> losTypes = _MenuService.GetMenuTypes().Result;
+                
                 List<MenuList> losTypes = _MenuService.GetUserMenuList(MenuInfo).Result;
                 List<UserMenuDTO> menulst = new List<UserMenuDTO>();
                 foreach (var item in losTypes)
@@ -447,7 +428,7 @@ namespace CommonTests.Web.Controllers
             return result;
         }
 
-        //  public List<UserSubMenuDTO> GetUserSUBMENU(string menuCode)
+       
         public List<UserSubMenuDTO> GetUserSUBMENU(string menuCode, int RoleId)
         {
             var result = new List<UserSubMenuDTO>();
@@ -457,10 +438,9 @@ namespace CommonTests.Web.Controllers
                 SubMenuDTO submenu = new SubMenuDTO();
                 submenu.Menu_Code = menuCode;
                 submenu.Role_ID = RoleId;
-                // List<SubMenuDTO> losTypes = _MenuService.GetSubMenuTypes(MenuId).Result;
-                // List<SubMenuDTO> losTypes = _MenuService.GetSubMenuTypes(submenu).Result;
+                
                 List<SubMenuDTO> losTypes = _MenuService.GetSubMenuUserTypes(submenu).Result;
-                //  GetSubMenuUserTypes
+               
                 List<UserSubMenuDTO> menulst = new List<UserSubMenuDTO>();
                 foreach (var item in losTypes)
                 {
@@ -542,10 +522,10 @@ namespace CommonTests.Web.Controllers
             var result = new List<SubMenuDTO>();
             try
             {
-                // string MenuId = losCode;
+                
                 SubMenuDTO submenu = new SubMenuDTO();
                 submenu.Menu_Code = losCode;
-                // List<SubMenuDTO> losTypes = _MenuService.GetSubMenuTypes(MenuId).Result;
+               
                 List<SubMenuDTO> losTypes = _MenuService.GetSubMenuTypes(submenu).Result;
                 List<SubMenuDTO> menulst = new List<SubMenuDTO>();
                 foreach (var item in losTypes)
@@ -571,11 +551,11 @@ namespace CommonTests.Web.Controllers
             var result = new List<AddSbuDTO>();
             try
             {
-                // string MenuId = losCode;
+                
                 AddSbuDTO sbulist = new AddSbuDTO();
                 var losCodeList = !String.IsNullOrEmpty(losCode) ? losCode.Split(',').Distinct().ToList() : new List<string>();
                 sbulist.LOS_Code = String.Join(',', losCodeList);
-                // List<SubMenuDTO> losTypes = _MenuService.GetSubMenuTypes(MenuId).Result;
+                
                 List<AddSbuDTO> losTypes = _MenuService.GetUserSBU(sbulist).Result;
                 List<AddSbuDTO> menulst = new List<AddSbuDTO>();
                 foreach (var item in losTypes)
@@ -630,14 +610,11 @@ namespace CommonTests.Web.Controllers
                 foreach (var item in losTypes)
                 {
                     EngPartnerMangerDTO userList = new EngPartnerMangerDTO();
-                    //UserDTO dr = new UserDTO();
-                    // Comm_Eng_Partner_Manger_DTO emp = new Comm_Eng_Partner_Manger_DTO();
-                    // Comm_Eng_Partner_Manger_DTO los = new Comm_Eng_Partner_Manger_DTO();
+                    
                     userList.ID = item.ID;
                     userList.Name = item.Name;
                     userList.FullName = item.FullName;
-                    //menulst.Add(emp);
-                    //menulst.Add(emp);
+                   
                     menulst.Add(userList);
 
 
@@ -661,8 +638,7 @@ namespace CommonTests.Web.Controllers
         public IActionResult AddRoles()
         {
             var data = Request.Form["users"];
-            //var losCode = Request.Form["losCode"].ToString();
-            //var sbuCode = Request.Form["sbuCode"].ToString();
+            
             return Ok();
         }
 
@@ -783,25 +759,24 @@ namespace CommonTests.Web.Controllers
                     {
                         if (permissionList.Count > 0)
                         {
-                            // permissionList = permissionList.Except(existingPermissionList).ToList();
+                            
                             var checkList = new List<UserPermissionList>();
                             foreach (var list in permissionList)
                             {
-                                //if (existingPermissionList.Where(_ => _.menuid == list.menuid.ToString() && _.submenuid == list.submenuid.ToString() && _.permission == list.permission.ToString()).Count() == 0)
-                                //{
+                                
                                 if (checkList.Count == 0 || checkList.Where(_ => _.menuid == list.menuid.ToString() && _.permission == list.permission.ToString()).Count() == 0)
                                 {
                                     UserList userPermission = new UserList();
                                     userPermission.User_ID = status;
                                     userPermission.Menu_Id = Convert.ToInt32(list.menuid);
-                                    //userPermission.SubMenu_Id = Convert.ToInt32(list.submenuid);
+                                    
                                     userPermission.RoleId = RoleId;
                                     userPermission.Has_Write_Permission = Convert.ToInt32(list.permission);
                                     userPermission.Status_ID = statuscheck;
                                     result = _MenuService.SaveUsersPermission(userPermission, userData);
                                     checkList.Add(list);
                                 }
-                                //}
+                               
                             }
                         }
                         else
@@ -822,9 +797,9 @@ namespace CommonTests.Web.Controllers
                         }
                     }
                 }
-                // status = result;
+               
                 result = status;
-                //var result = "";
+                
                 var tempresult = TempData["MasterErrorMsg"];
                 var pageresult = JsonConvert.DeserializeObject<List<MasterErrorMessage>>(tempresult.ToString());
                 TempData.Keep();
@@ -883,7 +858,7 @@ namespace CommonTests.Web.Controllers
 
                 foreach (var item in user_List)
                 {
-                    //item.Role_Menu_Mapping_IDstr = item.Role_Menu_Mapping_IDstr.Replace(@"\", "");
+                    
 
                     var isMandatoryValidationPassed = true;
                     var MandatoryMessage = "Please Enter following fileds value - ";
@@ -960,7 +935,7 @@ namespace CommonTests.Web.Controllers
 
 
                 result = returnresult;
-                //var result = "";
+                
                 var tempresult = TempData["MasterErrorMsg"];
                 var pageresult = JsonConvert.DeserializeObject<List<MasterErrorMessage>>(tempresult.ToString());
                 TempData.Keep();
@@ -1003,16 +978,11 @@ namespace CommonTests.Web.Controllers
             return Content(JsonConvert.SerializeObject(_responseData), "application/json");
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult> GetbyRoleId(string RoleList)
-        //{
-        //    var result = "";
-        //    return Content(JsonConvert.SerializeObject(result), "application/json");
-        //}
+        
         [HttpGet]
         public RoleList GetbyRoleId(int RoleId)
         {
-            // string MenuId = RoleId;
+            
             var result = new RoleList();
             try
             {
@@ -1050,21 +1020,7 @@ namespace CommonTests.Web.Controllers
 
                     dr.RoleMenuMapping_List.Add(Convert.ToString(item.RoleMenuMappingID));
 
-                    // dr.LOS_Code_List.Add()
-                    //  dr.LOS_Code_List =con item.Menu_Id;
-                    //dr.LOS_Code_List.Add("string");
-
-                    //string Menucode = Convert.ToString(item.Menu_Id);
-                    //LOS_Code_List.Add(Menucode);
-                    //dr.LOS_Code_List.Add(Convert.ToString(item.Menu_Id));
-                    //dr.LOS_Code_List.Add("v");
-                    //dr.LOS_Name_List.Add(item.Menu_Name);
-                    //string SubMenuCode = Convert.ToString(item.SubMenu_Id);
-                    //dr.SBU_Code_List.Add(SubMenuCode);
-                    //dr.SBU_Name_List.Add(item.Submenu_Name);
-                    //menulst.Add(dr.LOS_Code_List.Add())
-                    //menulst.Add(dr);
-
+                  
                 }
                 result = dr;
             }
@@ -1082,18 +1038,17 @@ namespace CommonTests.Web.Controllers
         {
             try
             {
-                //RoleList roleInfo = new RoleList();
+               
                 UserList userInfo = new UserList();
-                //roleInfo.RoleId = RoleId;
+                
                 userInfo.User_ID = User_ID;
 
-                //List<RoleList> losTypes = _MenuService.GetbyRoleId(roleInfo).Result;
+                
                 List<UserList> losTypes = _MenuService.GetbyUserId(userInfo).Result;
 
 
                 List<UserList> menudetails = new List<UserList>();
-                //List<RoleList> menulst = new List<RoleList>();
-                //RoleList dr = new RoleList();
+                
                 List<UserList> menulst = new List<UserList>();
                 List<UserPermission> menulist = new List<UserPermission>();
                 UserList dr = new UserList();
@@ -1116,7 +1071,7 @@ namespace CommonTests.Web.Controllers
 
 
                 List<UserList> losType = _MenuService.GetMenubyUserId(userInfo).Result;
-                //int count = losTypes.Where(y => y.SubMenu_Id > 0).Count();
+                
 
                 var distinctLos = from c in losTypes
                                   group c by new
@@ -1153,21 +1108,11 @@ namespace CommonTests.Web.Controllers
 
                     UserPermissiondetails obj = new UserPermissiondetails();
                     obj.menuid = Convert.ToString(item.Menu_Id);
-                    //obj.submenuid = Convert.ToString(item.SubMenu_Id);
+                    
                     obj.permission = Convert.ToString(item.Has_Write_Permission);
-                    //if (item.SubMenu_Id == 0)
-                    //{
-                    //    obj.listID = "" + item.Menu_Id + "_" + item.Menu_Id + "_" + 0;
-                    //}
-                    //else
-                    //{
-                    //    obj.listID = "" + item.Menu_Id + "_" + item.SubMenu_Id;
-                    //}
-
                     dr.MENU_Code_List.Add(Convert.ToString(item.Menu_Id));
                     dr.MENU_Name_List.Add(Convert.ToString(item.Menu_Name));
-                    //dr.SUBMENU_Code_List.Add(Convert.ToString(item.SubMenu_Id));
-                    //dr.SUBMENU_Name_List.Add(item.Submenu_Name);
+                    
                     dr.userPermissiondetails.Add(obj);
 
                 }
@@ -1195,7 +1140,7 @@ namespace CommonTests.Web.Controllers
 
             return View();
         }
-       
+
         public IActionResult Roles()
         {
             try
@@ -1225,31 +1170,12 @@ namespace CommonTests.Web.Controllers
 
 
 
-        //public IActionResult SubMenu()
-        //{
-        //    SubMenuInfo adminViewModel = new SubMenuInfo();
-        //    List<SelectListItem> MENUTypesLists = new List<SelectListItem>();
-        //    List<MenuList> losTypes = _MenuService.GetMenuTypes().Result;
-        //    foreach (dynamic item in losTypes)
-        //    {
-        //        MENUTypesLists.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
-        //    }
-        //    adminViewModel.MenuList = MENUTypesLists;
-        //    return View(adminViewModel);
-        //}
+       
 
 
         public IActionResult SubMenu()
         {
-            //SubMenuInfo adminViewModel = new SubMenuInfo();
-            //List<SelectListItem> MENUTypesLists = new List<SelectListItem>();
-            //List<MenuList> losTypes = _MenuService.GetMenuTypes().Result;
-            //foreach (dynamic item in losTypes)
-            //{
-            //    MENUTypesLists.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
-            //}
-            //adminViewModel.MenuList = MENUTypesLists;
-            //return View(adminViewModel);
+
 
             try
             {
@@ -1313,5 +1239,5 @@ namespace CommonTests.Web.Controllers
             return null;
         }
 
-        }
+    }
 }
